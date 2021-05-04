@@ -16,3 +16,15 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'ffxiv', 'namespace' => '\App\Http\Controllers\Ffxiv'], function () use ($router) {
+  $router->get('characters',  ['uses' => 'FfxivCharacterController@getAll']);
+
+  $router->get('characters/{id}', ['uses' => 'FfxivCharacterController@get']);
+
+  $router->post('characters', ['uses' => 'FfxivCharacterController@create']);
+
+  $router->delete('characters/{id}', ['uses' => 'FfxivCharacterController@delete']);
+
+  $router->put('characters/{id}', ['uses' => 'FfxivCharacterController@update']);
+});

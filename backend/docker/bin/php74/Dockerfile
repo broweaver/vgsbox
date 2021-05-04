@@ -79,5 +79,7 @@ RUN a2enmod rewrite headers
 # Cleanup
 RUN rm -rf /usr/src/*
 
-# Install composer packages
-RUN bash -c "composer install"
+COPY healthcheck.sh /healthcheck.sh
+RUN chmod a+x /healthcheck.sh
+
+HEALTHCHECK --interval=5s CMD /healthcheck.sh
